@@ -12,7 +12,8 @@ class Door {
         return x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height
     }
     draw() {
-        // code here
+        // msj text
+        image(this.img, this.x, this.y, this.width, this.height)
     }
 }
 
