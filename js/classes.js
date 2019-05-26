@@ -8,8 +8,8 @@ class Door {
         this.height = height
     }
 
-    imIn(x, y) {
-        return x > this.x && x < this.x + this.width && y > this.y && y < this.y + this.height
+    imIn(x, width) {
+        return x > this.x && x + width < this.x + this.width
     }
     draw() {
         // msj text
@@ -19,7 +19,9 @@ class Door {
 
 class Doors {
     constructor(x, y, img, msj, width, height) {
-        this.doors = [new Door(x, y, img, msj, width, height)]
+        let door = new Door(x, y, img, msj, width, height)
+        door.imWinner = true
+        this.doors = [door]
     }
     add(x, y, img, msj, width, height) {
         this.doors.push(new Door(x, y, img, msj, width, height))
@@ -29,10 +31,10 @@ class Doors {
             this.doors[i].draw()
         }
     }
-    imIn(x, y) {
+    imIn(x, width) {
         let result = []
         for (let i = 0; i < this.doors.length; i++) {
-            if (this.doors[i].imIn(x, y)) {
+            if (this.doors[i].imIn(x, width)) {
                 result.push(this.doors[i])
             }
         }
@@ -88,5 +90,40 @@ class Player {
             this.imgCounter += 1
         }
         image(this['img' + this.lastImage], this.position.x, this.position.y, this.playerWidth, this.playerHeight)
+    }
+}
+
+class Level {
+    constructor(question, doors, player){
+        this.question = question
+        this.doors = doors
+        this.player = player
+    }
+    draw(){
+        // question display
+        this.doors.draw()
+        if(keyIsPressed){
+            if (keyIsDown(37)){
+              this.player.move('left')
+            }
+            if(keyIsDown(39)){
+              this.player.move('right')
+            }
+        } else {
+            this.player.draw()
+        }
+    }
+    iWin(){
+        let possibleDoors = this.doors.imIn(this.player.position.x, this.player.playerWidth)
+        if(possibleDoors.length > 0){
+            for(let i = 0; i < possibleDoors.length; i++){
+                if(possibleDoors[i].imWinner){
+                    return true
+                }
+            }
+            return false
+        } else {
+            return undefined
+        }
     }
 }
