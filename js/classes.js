@@ -99,10 +99,11 @@ class Player {
 }
 
 class Level {
-    constructor(question, doors, player, questionX, questionY, questionWidth, heightQuestion=40, questionTextSize=15){
+    constructor(question, doors, player, buttons, questionX, questionY, questionWidth, heightQuestion=40, questionTextSize=15){
         this.question = question
         this.doors = doors
         this.player = player
+        this.buttons = buttons
         this.questionX = questionX
         this.questionY = questionY
         this.questionWidth = questionWidth
@@ -125,6 +126,7 @@ class Level {
         } else {
             this.player.draw()
         }
+        this.buttons.draw()
     }
     iWin(){
         let possibleDoors = this.doors.imIn(this.player.position.x, this.player.playerWidth)
@@ -138,6 +140,9 @@ class Level {
         } else {
             return undefined
         }
+    }
+    actionButtons(){
+        this.buttons.action()
     }
 }
 
@@ -153,5 +158,28 @@ class Button {
     }
     imIn(x, y){
         return x >= this.position.x && x <= this.position.x + this.size.x && y >= this.position.y && y <= this.position.y + this.size.y
+    }
+}
+
+class Buttons {
+    constructor(img, x, y, width, height, responseFunction){
+        let button = new Button(img,x, y, width, height, responseFunction)
+        this.buttons = [button]
+    }
+    add(img, x, y, width, height, responseFunction){
+        this.buttons.push(new Button(img, x, y, width, height, responseFunction))
+    }
+    draw(){
+        for(let i = 0; i < this.buttons.length; i++){
+            this.buttons[i].draw()
+        }
+    }
+    action(){
+        for(let i = 0; i < this.buttons.length; i++){
+            let button = this.buttons[i]
+            if(button.imIn(mouseX, mouseY)){
+                button.action()
+            }
+        }
     }
 }
