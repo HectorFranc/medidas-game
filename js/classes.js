@@ -1,30 +1,35 @@
 class Door {
-    constructor(x, y, img, msj, width, height) {
+    constructor(x, y, img, msj, width, height, heightMsj=40, msjTextSize=15) {
         this.x = x
         this.y = y
         this.img = img
         this.msj = msj
         this.width = width
         this.height = height
+        this.heightMsj = heightMsj
+        this.msjTextSize = msjTextSize
     }
 
     imIn(x, width) {
         return x > this.x && x + width < this.x + this.width
     }
     draw() {
-        // msj text
+        textSize(this.msjTextSize)
+        rect(this.x, this.y - this.heightMsj, this.width, this.heightMsj)
+        textAlign(CENTER, TOP)
+        text(this.msj, this.x, this.y - this.heightMsj, this.width, this.heightMsj)
         image(this.img, this.x, this.y, this.width, this.height)
     }
 }
 
 class Doors {
-    constructor(x, y, img, msj, width, height) {
-        let door = new Door(x, y, img, msj, width, height)
+    constructor(x, y, img, msj, width, height, heightMsj=40, msjTextSize=15) {
+        let door = new Door(x, y, img, msj, width, height, heightMsj, msjTextSize)
         door.imWinner = true
         this.doors = [door]
     }
-    add(x, y, img, msj, width, height) {
-        this.doors.push(new Door(x, y, img, msj, width, height))
+    add(x, y, img, msj, width, height, heightMsj=40, msjTextSize=15) {
+        this.doors.push(new Door(x, y, img, msj, width, height, heightMsj, msjTextSize))
     }
     draw() {
         for (let i = 0; i < this.doors.length; i++) {
