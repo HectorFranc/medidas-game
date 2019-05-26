@@ -140,3 +140,18 @@ class Level {
         }
     }
 }
+
+class Button {
+    constructor(img, x, y, width, height, responseFunction){
+        this.img = img
+        this.position = createVector(x, y)
+        this.size = createVector(width, height)
+        this.action = responseFunction
+    }
+    draw(){
+        image(this.img, this.position.x, this.position.y, this.size.x, this.size.y)
+    }
+    imIn(x, y){
+        return x >= this.position.x && x <= this.position.x + this.size.x && y >= this.position.y && y <= this.position.y + this.size.y
+    }
+}
