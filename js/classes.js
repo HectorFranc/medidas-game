@@ -99,13 +99,21 @@ class Player {
 }
 
 class Level {
-    constructor(question, doors, player){
+    constructor(question, doors, player, questionX, questionY, questionWidth, heightQuestion=40, questionTextSize=15){
         this.question = question
         this.doors = doors
         this.player = player
+        this.questionX = questionX
+        this.questionY = questionY
+        this.questionWidth = questionWidth
+        this.heightQuestion = heightQuestion
+        this.questionTextSize = questionTextSize
     }
     draw(){
-        // question display
+        textSize(this.questionTextSize)
+        rect(this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
+        textAlign(CENTER, TOP)
+        text(this.question, this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
         this.doors.draw()
         if(keyIsPressed){
             if (keyIsDown(37)){
