@@ -1,1 +1,15 @@
-
+* {
+    margin: 0;
+}
+#defaultCanvas0{
+    display: block;
+    margin: 0 auto;
+}
+.canvasResizedSmall{
+    width: 75% !important;
+    height: 100% !important;
+}
+.canvasResizedBig{
+    width: 100% !important;
+    height: 100% !important;
+}
