@@ -99,8 +99,9 @@ class Player {
 }
 
 class Level {
-    constructor(question, doors, player, buttons, questionX, questionY, questionWidth, heightQuestion=40, questionTextSize=15){
+    constructor(backgroundImg, question, doors, player, buttons, questionX, questionY, questionWidth, heightQuestion=40, questionTextSize=15){
         this.question = question
+        this.backgroundImg = backgroundImg
         this.doors = doors
         this.player = player
         this.buttons = buttons
@@ -111,6 +112,7 @@ class Level {
         this.questionTextSize = questionTextSize
     }
     draw(){
+        image(this.backgroundImg, 0, 0, width, height)
         textSize(this.questionTextSize)
         rect(this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
         textAlign(CENTER, TOP)
