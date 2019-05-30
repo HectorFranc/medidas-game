@@ -25,17 +25,17 @@ function setup() {
   let doors = new Doors(400, 370, doorImg, 'Hector', 150, 130)
   doors.add(700, 370, doorImg, 'Pedro', 150, 130)
   doors.add(1000, 370, doorImg, 'Ramon', 150, 130)
-  levels.push(new Level(nivel1, '¿llamas?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 100, 300, 400, 40, 20))
+  levels.push(new Level(nivel1, '¿llamas?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
   doors = new Doors(400, 370, doorImg, 'catorce', 100, 100)
   doors.add(700, 370, doorImg, 'trece', 150, 130)
   doors.add(1000, 370, doorImg, 'doce', 150, 130, 70, 30)
-  levels.push(new Level(nivel2, '¿años?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 100, 300, 400, 40, 20))
+  levels.push(new Level(nivel2, '¿años?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
   doors = new Doors(400, 370, doorImg, 'Verne', 150, 130)
   doors.add(700, 370, doorImg, 'Douglas', 150, 130)
   doors.add(1000, 370, doorImg, 'Ernest', 150, 130, 70, 30)
-  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4),buttons, 100, 300, 400, 40, 20))
+  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4),buttons, 50, 30, 1265, 60, 20))
 
   level = levels[0]
 
