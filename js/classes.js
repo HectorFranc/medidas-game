@@ -50,6 +50,7 @@ class Doors {
 class Player {
     constructor(x, y, velocity, changeImgVelocity, playerWidth, playerHeight, imgRight, imgLeft, imgRightSecond, imgLeftSecond) {
         this.position = createVector(x, y)
+        this.originalPosition = createVector(x, y)
         this.velocity = velocity
         this.changeImgVelocity = changeImgVelocity
         this.playerWidth = playerWidth
@@ -73,6 +74,9 @@ class Player {
             }
             this.draw(direction)
         }
+    }
+    restart(){
+        this.position = this.originalPosition
     }
     draw(direction) {
         if (direction) {
@@ -142,6 +146,9 @@ class Level {
         } else {
             return undefined
         }
+    }
+    restart(){
+        this.player.restart()
     }
     actionButtons(){
         this.buttons.action()
