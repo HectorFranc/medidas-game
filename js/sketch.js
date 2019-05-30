@@ -22,20 +22,20 @@ function setup() {
 
   buttons = new Buttons(buttonImg, 1000, 600, 60, 50, ()=>{window['fullscreen'](window['fullscreen'])})
 
-  let doors = new Doors(60, 100, doorImg, 'Hector JAJD JADRI JDFF EK', 100, 100, 70, 30)
-  doors.add(200, 100, doorImg, 'Pedro', 100, 100)
-  doors.add(500, 100, doorImg, 'Ramon', 100, 100)
-  levels.push(new Level(nivel1, '¿Como te llamas?', doors, new Player(20,200, 3, 5, 60, 90, img, img3, img2, img4 ), buttons, 100, 300, 400, 40, 20))
+  let doors = new Doors(400, 370, doorImg, 'Hector', 150, 130)
+  doors.add(700, 370, doorImg, 'Pedro', 150, 130)
+  doors.add(1000, 370, doorImg, 'Ramon', 150, 130)
+  levels.push(new Level(nivel1, '¿llamas?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 100, 300, 400, 40, 20))
 
-  doors = new Doors(500, 100, doorImg, 'catorce', 100, 100)
-  doors.add(200, 100, doorImg, 'trece', 100, 100)
-  doors.add(60, 100, doorImg, 'doce', 100, 100, 70, 30)
-  levels.push(new Level(nivel2, '¿Cuantos años?', doors, new Player(20,200, 3, 5, 60, 90, img, img3, img2, img4 ), buttons, 100, 300, 400, 40, 20))
+  doors = new Doors(400, 370, doorImg, 'catorce', 100, 100)
+  doors.add(700, 370, doorImg, 'trece', 150, 130)
+  doors.add(1000, 370, doorImg, 'doce', 150, 130, 70, 30)
+  levels.push(new Level(nivel2, '¿años?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 100, 300, 400, 40, 20))
 
-  doors = new Doors(200, 100, doorImg, 'Verne', 100, 100)
-  doors.add(500, 100, doorImg, 'Douglas', 100, 100)
-  doors.add(60, 100, doorImg, 'Ernest', 100, 100, 70, 30)
-  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20,200, 3, 5, 60, 90, img, img3, img2, img4 ),buttons, 100, 300, 400, 40, 20))
+  doors = new Doors(400, 370, doorImg, 'Verne', 150, 130)
+  doors.add(700, 370, doorImg, 'Douglas', 150, 130)
+  doors.add(1000, 370, doorImg, 'Ernest', 150, 130, 70, 30)
+  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4),buttons, 100, 300, 400, 40, 20))
 
   level = levels[0]
 
