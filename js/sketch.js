@@ -1,4 +1,4 @@
-var level, img, im2, img3, img4, doorImg, buttons, buttonImg, gameover, winImg, nivel1, nivel2, nivel3;
+var level, img, im2, img3, img4, doorImg, buttons, buttonImg, gameover, winImg, nivel1, nivel2, nivel3, buttonRestart;
 var levels = []
 var actualLevel = 0
 
@@ -20,6 +20,8 @@ function setup() {
   createCanvas(1366, 768)
   windowResized()
 
+  buttonRestart = new Button(buttonImg, 300, 500, 40, 40, ()=>{actualLevel = 0})
+
   buttons = new Buttons(buttonImg, 1000, 600, 60, 50, ()=>{window['fullscreen'](window['fullscreen'])})
 
   let doors = new Doors(400, 370, doorImg, 'Hector', 150, 130)
@@ -27,14 +29,14 @@ function setup() {
   doors.add(1000, 370, doorImg, 'Ramon', 150, 130)
   levels.push(new Level(nivel1, '¿llamas?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
-  doors = new Doors(400, 370, doorImg, 'catorce', 100, 100)
+  doors = new Doors(400, 370, doorImg, 'catorce', 150, 130)
   doors.add(700, 370, doorImg, 'trece', 150, 130)
-  doors.add(1000, 370, doorImg, 'doce', 150, 130, 70, 30)
+  doors.add(1000, 370, doorImg, 'doce', 150, 130)
   levels.push(new Level(nivel2, '¿años?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
   doors = new Doors(400, 370, doorImg, 'Verne', 150, 130)
   doors.add(700, 370, doorImg, 'Douglas', 150, 130)
-  doors.add(1000, 370, doorImg, 'Ernest', 150, 130, 70, 30)
+  doors.add(1000, 370, doorImg, 'Ernest', 150, 130)
   levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4),buttons, 50, 30, 1265, 60, 20))
 
   level = levels[0]
@@ -65,7 +67,16 @@ function keyPressed() {
         window['draw'] = () => {
           background('white')
           image(gameover, width/2-200, height/2-200, 400, 400)
-
+          buttonRestart.draw()
+          if(mouseIsPressed){
+            if(buttonRestart.imIn(mouseX, mouseY)){
+              buttonRestart.action()
+              level = levels[actualLevel]
+              draw = () => {
+                level.draw()
+              }
+            }
+          }
         }
       }
     }

@@ -11,7 +11,7 @@ class Door {
     }
 
     imIn(x, width) {
-        return x > this.x && x + width < this.x + this.width
+        return x > this.x - 15 && x + width < this.x + 15 + this.width
     }
     draw() {
         textSize(this.msjTextSize)
