@@ -132,11 +132,14 @@ class Level {
         text(this.question, this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
         this.doors.draw()
         if (keyIsPressed) {
-            if (keyIsDown(37)) {
-                this.player.move('left')
-            }
-            if (keyIsDown(39)) {
-                this.player.move('right')
+            if (keyIsDown(37) || keyIsDown(39)) {
+                if (keyIsDown(39)) {
+                    this.player.move('right')
+                } else {
+                    this.player.move('left')
+                }
+            } else {
+                this.player.draw()
             }
         } else {
             this.player.draw()
