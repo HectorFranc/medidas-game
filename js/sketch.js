@@ -1,6 +1,7 @@
-var level, img, im2, img3, img4, doorImg, buttons, buttonImg, gameover, winImg, nivel1, nivel2, nivel3, buttonRestart, victoriaBackground;
+var level, img, im2, img3, img4, doorImg, buttons, buttonImg, gameover, winImg, nivel1, nivel2, nivel3, buttonRestart, victoriaBackground, introImg;
 var levels = []
 var actualLevel = 0
+var gameStarted = false
 
 function preload() {
   img = loadImage('img/personaje.png')
@@ -15,6 +16,7 @@ function preload() {
   nivel2 = loadImage('img/puerta2.jpg')
   nivel3 = loadImage('img/inframundo.jpg')
   victoriaBackground = loadImage('img/victoriaBackkground.jpg')
+  introImg = victoriaBackground // Cambiar por verdadero background
 }
 
 function setup() {
@@ -45,40 +47,49 @@ function setup() {
 }
 
 function draw() {
-  level.draw()
+  if(gameStarted){
+    level.draw()
+  } else {
+    image(introImg, 0, 0, width, height)
+    if(mouseIsPressed){
+      gameStarted = true
+    }
+  }
 }
 
 function keyPressed() {
-  if (keyCode === UP_ARROW) {
-    if(level.iWin() != undefined){
-      if(level.iWin()){
-        if(actualLevel+1 === levels.length){
-          window['draw'] = () => {
-            background('white')
-            image(victoriaBackground, 0, 0, width, height)
-            image(winImg, width/2-200, height/2-200, 400, 400)
+  if(gameStarted){
+    if (keyCode === UP_ARROW) {
+      if(level.iWin() != undefined){
+        if(level.iWin()){
+          if(actualLevel+1 === levels.length){
+            window['draw'] = () => {
+              background('white')
+              image(victoriaBackground, 0, 0, width, height)
+              image(winImg, width/2-200, height/2-200, 400, 400)
+            }
+          } else {
+            actualLevel +=1
+            level = levels[actualLevel]
+            draw = () => {
+              level.draw()
+            }
           }
         } else {
-          actualLevel +=1
-          level = levels[actualLevel]
-          draw = () => {
-            level.draw()
-          }
-        }
-      } else {
-        window['draw'] = () => {
-          background('white')
-          image(gameover, width/2-200, height/2-200, 400, 400)
-          buttonRestart.draw()
-          if(mouseIsPressed){
-            if(buttonRestart.imIn(mouseX, mouseY)){
-              for(let i = 0; i < levels.length; i++){
-                levels[i].restart()
-              }
-              buttonRestart.action()
-              level = levels[actualLevel]
-              draw = () => {
-                level.draw()
+          window['draw'] = () => {
+            background('white')
+            image(gameover, width/2-200, height/2-200, 400, 400)
+            buttonRestart.draw()
+            if(mouseIsPressed){
+              if(buttonRestart.imIn(mouseX, mouseY)){
+                for(let i = 0; i < levels.length; i++){
+                  levels[i].restart()
+                }
+                buttonRestart.action()
+                level = levels[actualLevel]
+                draw = () => {
+                  level.draw()
+                }
               }
             }
           }
@@ -89,5 +100,7 @@ function keyPressed() {
 }
 
 function mouseClicked() {
-  levels[actualLevel].actionButtons()
-}
+  if(gameStarted){
+    levels[actualLevel].actionButtons()
+  }
+  }
