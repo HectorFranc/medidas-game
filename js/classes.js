@@ -1,5 +1,5 @@
 class Door {
-    constructor(x, y, img, msj, width, height, heightMsj=40, msjTextSize=15) {
+    constructor(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
         this.x = x
         this.y = y
         this.img = img
@@ -23,18 +23,18 @@ class Door {
 }
 
 class Doors {
-    constructor(x, y, img, msj, width, height, heightMsj=40, msjTextSize=15) {
+    constructor(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
         this.positions = [createVector(x, y)]
         let door = new Door(x, y, img, msj, width, height, heightMsj, msjTextSize)
         door.imWinner = true
         this.doors = [door]
     }
-    add(x, y, img, msj, width, height, heightMsj=40, msjTextSize=15) {
+    add(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
         this.positions.push(createVector(x, y))
         let temporalPositions = this.positions.slice(0, this.positions.length)
         temporalPositions.sort(() => Math.random() - 0.5)
         this.doors.push(new Door(x, y, img, msj, width, height, heightMsj, msjTextSize))
-        for(var i = 0; i < this.doors.length; i++){
+        for (var i = 0; i < this.doors.length; i++) {
             let actualposition = temporalPositions.pop()
             this.doors[i].x = actualposition.x
             this.doors[i].y = actualposition.y
@@ -84,7 +84,7 @@ class Player {
             this.draw(direction)
         }
     }
-    restart(){
+    restart() {
         this.position = this.originalPosition
     }
     draw(direction) {
@@ -112,7 +112,7 @@ class Player {
 }
 
 class Level {
-    constructor(backgroundImg, question, doors, player, buttons, questionX, questionY, questionWidth, heightQuestion=40, questionTextSize=15){
+    constructor(backgroundImg, question, doors, player, buttons, questionX, questionY, questionWidth, heightQuestion = 40, questionTextSize = 15) {
         this.question = question
         this.backgroundImg = backgroundImg
         this.doors = doors
@@ -124,30 +124,30 @@ class Level {
         this.heightQuestion = heightQuestion
         this.questionTextSize = questionTextSize
     }
-    draw(){
+    draw() {
         image(this.backgroundImg, 0, 0, width, height)
         textSize(this.questionTextSize)
         rect(this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
         textAlign(CENTER, TOP)
         text(this.question, this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
         this.doors.draw()
-        if(keyIsPressed){
-            if (keyIsDown(37)){
-              this.player.move('left')
+        if (keyIsPressed) {
+            if (keyIsDown(37)) {
+                this.player.move('left')
             }
-            if(keyIsDown(39)){
-              this.player.move('right')
+            if (keyIsDown(39)) {
+                this.player.move('right')
             }
         } else {
             this.player.draw()
         }
         this.buttons.draw()
     }
-    iWin(){
+    iWin() {
         let possibleDoors = this.doors.imIn(this.player.position.x, this.player.playerWidth)
-        if(possibleDoors.length > 0){
-            for(let i = 0; i < possibleDoors.length; i++){
-                if(possibleDoors[i].imWinner){
+        if (possibleDoors.length > 0) {
+            for (let i = 0; i < possibleDoors.length; i++) {
+                if (possibleDoors[i].imWinner) {
                     return true
                 }
             }
@@ -156,46 +156,46 @@ class Level {
             return undefined
         }
     }
-    restart(){
+    restart() {
         this.player.restart()
     }
-    actionButtons(){
+    actionButtons() {
         this.buttons.action()
     }
 }
 
 class Button {
-    constructor(img, x, y, width, height, responseFunction){
+    constructor(img, x, y, width, height, responseFunction) {
         this.img = img
         this.position = createVector(x, y)
         this.size = createVector(width, height)
         this.action = responseFunction
     }
-    draw(){
+    draw() {
         image(this.img, this.position.x, this.position.y, this.size.x, this.size.y)
     }
-    imIn(x, y){
+    imIn(x, y) {
         return x >= this.position.x && x <= this.position.x + this.size.x && y >= this.position.y && y <= this.position.y + this.size.y
     }
 }
 
 class Buttons {
-    constructor(img, x, y, width, height, responseFunction){
-        let button = new Button(img,x, y, width, height, responseFunction)
+    constructor(img, x, y, width, height, responseFunction) {
+        let button = new Button(img, x, y, width, height, responseFunction)
         this.buttons = [button]
     }
-    add(img, x, y, width, height, responseFunction){
+    add(img, x, y, width, height, responseFunction) {
         this.buttons.push(new Button(img, x, y, width, height, responseFunction))
     }
-    draw(){
-        for(let i = 0; i < this.buttons.length; i++){
+    draw() {
+        for (let i = 0; i < this.buttons.length; i++) {
             this.buttons[i].draw()
         }
     }
-    action(){
-        for(let i = 0; i < this.buttons.length; i++){
+    action() {
+        for (let i = 0; i < this.buttons.length; i++) {
             let button = this.buttons[i]
-            if(button.imIn(mouseX, mouseY)){
+            if (button.imIn(mouseX, mouseY)) {
                 button.action()
             }
         }

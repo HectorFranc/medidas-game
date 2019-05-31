@@ -24,9 +24,11 @@ function setup() {
   createCanvas(1366, 768)
   windowResized()
 
-  buttonRestart = new Button(buttonImg, 300, 500, 40, 40, ()=>{actualLevel = 0})
+  buttonRestart = new Button(buttonImg, 300, 500, 40, 40, () => {
+    actualLevel = 0
+  })
 
-  buttons = new Buttons(buttonImg, 1300, 680, 60, 60, ()=>{
+  buttons = new Buttons(buttonImg, 1300, 680, 60, 60, () => {
     fullscreen(!fullscreen())
   })
 
@@ -43,14 +45,14 @@ function setup() {
   doors = new Doors(330, 370, doorImg, 'Verne', 150, 200)
   doors.add(630, 370, doorImg, 'Douglas', 150, 200)
   doors.add(930, 370, doorImg, 'Ernest', 150, 200)
-  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 570, 5, 5, 120, 170, img, img3, img2, img4),buttons, 50, 30, 1265, 60, 20))
+  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 570, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
   level = levels[0]
 
 }
 
 function draw() {
-  if(gameStarted){
+  if (gameStarted) {
     level.draw()
   } else {
     image(introImg, 0, 0, width, height)
@@ -59,25 +61,25 @@ function draw() {
     rotate(28)
     image(introButtonImg, 883, -285, 820, 490)
     pop()
-    if(mouseIsPressed){
+    if (mouseIsPressed) {
       gameStarted = true
     }
   }
 }
 
 function keyPressed() {
-  if(gameStarted){
+  if (gameStarted) {
     if (keyCode === UP_ARROW) {
-      if(level.iWin() != undefined){
-        if(level.iWin()){
-          if(actualLevel+1 === levels.length){
+      if (level.iWin() != undefined) {
+        if (level.iWin()) {
+          if (actualLevel + 1 === levels.length) {
             window['draw'] = () => {
               background('white')
               image(victoriaBackground, 0, 0, width, height)
-              image(winImg, width/2-200, height/2-200, 400, 400)
+              image(winImg, width / 2 - 200, height / 2 - 200, 400, 400)
             }
           } else {
-            actualLevel +=1
+            actualLevel += 1
             level = levels[actualLevel]
             draw = () => {
               level.draw()
@@ -86,11 +88,11 @@ function keyPressed() {
         } else {
           window['draw'] = () => {
             background('white')
-            image(gameover, width/2-200, height/2-200, 400, 400)
+            image(gameover, width / 2 - 200, height / 2 - 200, 400, 400)
             buttonRestart.draw()
-            if(mouseIsPressed){
-              if(buttonRestart.imIn(mouseX, mouseY)){
-                for(let i = 0; i < levels.length; i++){
+            if (mouseIsPressed) {
+              if (buttonRestart.imIn(mouseX, mouseY)) {
+                for (let i = 0; i < levels.length; i++) {
                   levels[i].restart()
                 }
                 buttonRestart.action()
@@ -108,7 +110,7 @@ function keyPressed() {
 }
 
 function mouseClicked() {
-  if(gameStarted){
+  if (gameStarted) {
     levels[actualLevel].actionButtons()
   }
 }
