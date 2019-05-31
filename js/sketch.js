@@ -1,4 +1,4 @@
-var level, img, im2, img3, img4, doorImg, buttons, buttonImg, gameover, winImg, nivel1, nivel2, nivel3, buttonRestart, victoriaBackground, introImg;
+var level, img, im2, img3, img4, doorImg, buttons, buttonImg, gameover, winImg, nivel1, nivel2, nivel3, buttonRestart, victoriaBackground, introImg, introButtonImg, introButton;
 var levels = []
 var actualLevel = 0
 var gameStarted = false
@@ -16,7 +16,8 @@ function preload() {
   nivel2 = loadImage('img/puerta2.jpg')
   nivel3 = loadImage('img/inframundo.jpg')
   victoriaBackground = loadImage('img/victoriaBackkground.jpg')
-  introImg = victoriaBackground // Cambiar por verdadero background
+  introImg = loadImage('img/introBackground.jpg')
+  introButtonImg = loadImage('img/introButtonImg.png')
 }
 
 function setup() {
@@ -24,6 +25,8 @@ function setup() {
   windowResized()
 
   buttonRestart = new Button(buttonImg, 300, 500, 40, 40, ()=>{actualLevel = 0})
+
+  introButton = new Button(introButtonImg, 800, 320, 800, 450, ()=>{})
 
   buttons = new Buttons(buttonImg, 1000, 600, 60, 50, ()=>{window['fullscreen'](window['fullscreen'])})
 
@@ -51,9 +54,7 @@ function draw() {
     level.draw()
   } else {
     image(introImg, 0, 0, width, height)
-    if(mouseIsPressed){
-      gameStarted = true
-    }
+    introButton.draw()
   }
 }
 
@@ -102,5 +103,9 @@ function keyPressed() {
 function mouseClicked() {
   if(gameStarted){
     levels[actualLevel].actionButtons()
+  } else {
+    if(introButton.imIn(mouseX, mouseY)){
+      gameStarted = true
+    }
   }
-  }
+}
