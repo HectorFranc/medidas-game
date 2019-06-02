@@ -31,21 +31,24 @@ function setup() {
   buttons = new Buttons(buttonImg, 1300, 680, 60, 60, () => {
     fullscreen(!fullscreen())
   })
+  
+  let actualQuestion = questions.pop()
+  let doors = new Doors(400, 350, doorImg, actualQuestion.correctAnswer, 150, 200)
+  doors.add(700, 350, doorImg, actualQuestion.answers.pop(), 150, 200)
+  doors.add(1000, 350, doorImg, actualQuestion.answers.pop(), 150, 200)
+  levels.push(new Level(nivel1, actualQuestion.question, doors, new Player(20, 550, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
-  let doors = new Doors(400, 350, doorImg, 'Hector', 150, 200)
-  doors.add(700, 350, doorImg, 'Pedro', 150, 200)
-  doors.add(1000, 350, doorImg, 'Ramon', 150, 200)
-  levels.push(new Level(nivel1, '¿llamas?', doors, new Player(20, 550, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
+  actualQuestion = questions.pop()
+  doors = new Doors(400, 300, doorImg, actualQuestion.correctAnswer, 150, 200)
+  doors.add(700, 300, doorImg, actualQuestion.answers.pop(), 150, 200)
+  doors.add(1000, 300, doorImg, actualQuestion.answers.pop(), 150, 200)
+  levels.push(new Level(nivel2, actualQuestion.question, doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
-  doors = new Doors(400, 300, doorImg, 'catorce', 150, 200)
-  doors.add(700, 300, doorImg, 'trece', 150, 200)
-  doors.add(1000, 300, doorImg, 'doce', 150, 200)
-  levels.push(new Level(nivel2, '¿años?', doors, new Player(20, 500, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
-
-  doors = new Doors(330, 370, doorImg, 'Verne', 150, 200)
-  doors.add(630, 370, doorImg, 'Douglas', 150, 200)
-  doors.add(930, 370, doorImg, 'Ernest', 150, 200)
-  levels.push(new Level(nivel3, '¿Autor?', doors, new Player(20, 570, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
+  actualQuestion = questions.pop()
+  doors = new Doors(330, 370, doorImg, actualQuestion.correctAnswer, 150, 200)
+  doors.add(630, 370, doorImg, actualQuestion.answers.pop(), 150, 200)
+  doors.add(930, 370, doorImg, actualQuestion.answers.pop(), 150, 200)
+  levels.push(new Level(nivel3, actualQuestion.question, doors, new Player(20, 570, 5, 5, 120, 170, img, img3, img2, img4), buttons, 50, 30, 1265, 60, 20))
 
   level = levels[0]
 
