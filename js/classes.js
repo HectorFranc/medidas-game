@@ -1,5 +1,5 @@
 class Door {
-    constructor(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
+    constructor(x, y, img, msj, width, height, heightMsj = 70, msjTextSize = 15) {
         this.x = x
         this.y = y
         this.img = img
@@ -23,7 +23,7 @@ class Door {
 }
 
 class Doors {
-    constructor(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
+    constructor(x, y, img, msj, width, height, heightMsj = 70, msjTextSize = 15) {
         this.xPositions = [x]
         this.yPosition = y
         this.size = createVector(width, height)
@@ -31,7 +31,7 @@ class Doors {
         door.imWinner = true
         this.doors = [door]
     }
-    add(x, img, msj, heightMsj = 40, msjTextSize = 15) {
+    add(x, img, msj, heightMsj = 70, msjTextSize = 15) {
         this.xPositions.push(x)
         let temporalXPositions = this.xPositions.slice(0, this.xPositions.length)
         temporalXPositions.sort(() => Math.random() - 0.5)
@@ -145,7 +145,6 @@ class Level {
             this.player.draw()
         }
         this.buttons.draw()
-        ellipse(300, this.doors.yPosition + this.doors.size.y - this.player.playerHeight, 10, 10)
     }
     iWin() {
         let possibleDoors = this.doors.imIn(this.player.position.x, this.player.playerWidth)
