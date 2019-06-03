@@ -26,15 +26,16 @@ class Doors {
     constructor(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
         this.xPositions = [x]
         this.yPosition = y
+        this.size = createVector(width, height)
         let door = new Door(x, this.yPosition, img, msj, width, height, heightMsj, msjTextSize)
         door.imWinner = true
         this.doors = [door]
     }
-    add(x, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
+    add(x, img, msj, heightMsj = 40, msjTextSize = 15) {
         this.xPositions.push(x)
         let temporalXPositions = this.xPositions.slice(0, this.xPositions.length)
         temporalXPositions.sort(() => Math.random() - 0.5)
-        this.doors.push(new Door(x, this.yPosition, img, msj, width, height, heightMsj, msjTextSize))
+        this.doors.push(new Door(x, this.yPosition, img, msj, this.size.x, this.size.y, heightMsj, msjTextSize))
         for (var i = 0; i < this.doors.length; i++) {
             this.doors[i].x = temporalXPositions.pop()
         }
@@ -111,11 +112,11 @@ class Player {
 }
 
 class Level {
-    constructor(backgroundImg, question, doors, player, buttons, questionX, questionY, questionWidth, heightQuestion = 40, questionTextSize = 15) {
+    constructor(backgroundImg, question, doors, xPlayer, velocityPlayer, changeImgVelocityPlayer, playerWidth, playerHeight, imgRightPlayer, imgLeftPlayer, imgRightSecondPlayer, imgLeftSecondPlayer, buttons, questionX, questionY, questionWidth, heightQuestion = 40, questionTextSize = 15) {
         this.question = question
         this.backgroundImg = backgroundImg
         this.doors = doors
-        this.player = player
+        this.player = new Player(xPlayer, this.doors.yPosition + this.doors.size.y - playerHeight, velocityPlayer, changeImgVelocityPlayer, playerWidth, playerHeight, imgRightPlayer, imgLeftPlayer, imgRightSecondPlayer, imgLeftSecondPlayer)
         this.buttons = buttons
         this.questionX = questionX
         this.questionY = questionY
@@ -144,6 +145,7 @@ class Level {
             this.player.draw()
         }
         this.buttons.draw()
+        ellipse(300, this.doors.yPosition + this.doors.size.y - this.player.playerHeight, 10, 10)
     }
     iWin() {
         let possibleDoors = this.doors.imIn(this.player.position.x, this.player.playerWidth)
