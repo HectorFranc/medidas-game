@@ -24,20 +24,19 @@ class Door {
 
 class Doors {
     constructor(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
-        this.positions = [createVector(x, y)]
-        let door = new Door(x, y, img, msj, width, height, heightMsj, msjTextSize)
+        this.xPositions = [x]
+        this.yPosition = y
+        let door = new Door(x, this.yPosition, img, msj, width, height, heightMsj, msjTextSize)
         door.imWinner = true
         this.doors = [door]
     }
-    add(x, y, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
-        this.positions.push(createVector(x, y))
-        let temporalPositions = this.positions.slice(0, this.positions.length)
-        temporalPositions.sort(() => Math.random() - 0.5)
-        this.doors.push(new Door(x, y, img, msj, width, height, heightMsj, msjTextSize))
+    add(x, img, msj, width, height, heightMsj = 40, msjTextSize = 15) {
+        this.xPositions.push(x)
+        let temporalXPositions = this.xPositions.slice(0, this.xPositions.length)
+        temporalXPositions.sort(() => Math.random() - 0.5)
+        this.doors.push(new Door(x, this.yPosition, img, msj, width, height, heightMsj, msjTextSize))
         for (var i = 0; i < this.doors.length; i++) {
-            let actualposition = temporalPositions.pop()
-            this.doors[i].x = actualposition.x
-            this.doors[i].y = actualposition.y
+            this.doors[i].x = temporalXPositions.pop()
         }
     }
     draw() {
