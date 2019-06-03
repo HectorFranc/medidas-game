@@ -126,6 +126,11 @@ class Level {
     }
     draw() {
         image(this.backgroundImg, 0, 0, width, height)
+        push()
+        fill(0)
+        let heightFromTopToDoorsBase = this.doors.yPosition + this.doors.size.y
+        rect(0,  heightFromTopToDoorsBase + 1, width, height - heightFromTopToDoorsBase)
+        pop()
         textSize(this.questionTextSize)
         rect(this.questionX, this.questionY, this.questionWidth, this.heightQuestion)
         textAlign(CENTER, TOP)
